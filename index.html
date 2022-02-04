@@ -51,7 +51,7 @@
             document.getElementById("demo").innerHTML += '<b>威力彩結果</b><br>'
 
             let min = 1;
-            let max = 36;
+            let max = 38;
             let arr = [];
             let num = 0;
             let bArr = [];
@@ -68,7 +68,7 @@
 
             // 產生B區值
             let createBValue = function (aArr, currentIdx, cb) {
-                let randomResult = getRandom(min, max);
+                let randomResult = getRandom(1, 8);
 
                 if (aArr.indexOf(randomResult) === -1 && bArr.indexOf(randomResult) === -1) {
                     bArr.push(randomResult);
