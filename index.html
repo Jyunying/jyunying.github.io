@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>taiwanlottery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         function exec() {
 
@@ -82,10 +83,16 @@
 </head>
 <body>
     <div>
-        Min&nbsp;
-        <input type="number" id="min" value="1" />
-        Max&nbsp;
-        <input type="number" id="max" value="49" />
+        <table>
+            <tr>
+                <td>Min</td>
+                <td><input type="number" id="min" value="1" size="2" /></td>
+            </tr>
+            <tr>
+                <td>Max</td>
+                <td><input type="number" id="max" value="49" size="2" /></td>
+            </tr>
+        </table>
         <button type="button" onclick="exec()">執行</button>
         <span id="clock"></span>
     </div>
