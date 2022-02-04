@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>taiwanlottery</title>
+    <script>
+        function exec() {
+
+            document.getElementById("demo").innerHTML = '';
+
+            let max = parseInt(document.getElementById("max").value);
+            let min = parseInt(document.getElementById("min").value);
+
+            if (max <= 0) {
+                alert('請輸入正確數值(Max)');
+                return;
+            }
+            if (min <= 0) {
+                alert('請輸入正確數值(Min)');
+                return;
+            }
+
+            let arr = [];
+            let num = 0;
+
+            while (num < max) {
+                let randomResult = getRandom(min, max);
+
+                if (arr.indexOf(randomResult) === -1) {
+                    arr.push(randomResult);
+                    num++;
+                }
+            }
+
+            let currentIdx = 0;
+            for (let i = 0; i < arr.length; i += 6) {
+
+                currentIdx += 1;
+
+                let tempArr = arr.slice(i, i + 6);
+
+                if (tempArr.length === 6) {
+                    document.getElementById("demo").innerHTML += '第' + currentIdx + '組=';
+                    document.getElementById("demo").innerHTML += tempArr;
+                } else {
+                    document.getElementById("demo").innerHTML += '餘碼=';
+                    document.getElementById("demo").innerHTML += tempArr;
+                }
+
+                document.getElementById("demo").innerHTML += "<br>"
+            }
+
+        }
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * max) + min;
+        };
+
+        window.onload = function () {
+            startTime();
+        }
+
+        function startTime() {
+            var today = new Date();
+            var hh = today.getHours();
+            var mm = today.getMinutes();
+            var ss = today.getSeconds();
+            hh = checkTime(hh);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            document.getElementById('clock').innerHTML = hh + ":" + mm + ":" + ss;
+            setTimeout(startTime, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        Min&nbsp;
+        <input type="number" id="min" value="1" />
+        Max&nbsp;
+        <input type="number" id="max" value="49" />
+        <button type="button" onclick="exec()">執行</button>
+        <span id="clock"></span>
+    </div>
+    <p id="exec"></p>
+    <p id="demo"></p>
+</body>
+</html>
