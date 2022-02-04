@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>taiwanlottery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+
+        function lotteryLogic(min, max) {
+
+            document.getElementById("demo").innerHTML += '<b>樂透彩結果</b><br>'
+
+            let arr = [];
+            let num = 0;
+
+            // 產生亂數值存入 arr
+            while (num < max) {
+                let randomResult = getRandom(min, max);
+
+                if (arr.indexOf(randomResult) === -1) {
+                    arr.push(randomResult);
+                    num++;
+                }
+            }
+
+            // 輸出結果
+            let currentIdx = 0;
+            for (let i = 0; i < arr.length; i += 6) {
+
+                currentIdx += 1;
+
+                // 輸出內容
+                let resultBody = arr.slice(i, i + 6).sort((a, b) => a - b);
+
+                // 輸出標題
+                let resultTitle = resultBody.length === 6 ? '第' + currentIdx + '組 = ' : '餘' + resultBody.length + '碼 = ';
+
+                // 左補0
+                resultBody = resultBody.map(item => checkNum(item));
+
+                document.getElementById("demo").innerHTML += resultTitle;
+                document.getElementById("demo").innerHTML += resultBody;
+                document.getElementById("demo").innerHTML += "<br>"
+            }
+        }
+
+        function exec() {
+
+            let min = parseInt(document.getElementById('min').value);
+            let max = parseInt(document.getElementById('max').value);
+
+            if (min < 0) {
+                alert('數值不正確(Min)');
+                return;
+            }
+
+            if (max < 0) {
+                alert('數值不正確(Max)');
+                return;
+            }
+
+            document.getElementById("demo").innerHTML = '';
+
+            lotteryLogic(min, max);
+        }
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * max) + min;
+        };
+
+        function startTime() {
+            var today = new Date();
+            var hh = checkNum(today.getHours());
+            var mm = checkNum(today.getMinutes());
+            var ss = checkNum(today.getSeconds());
+            document.getElementById('clock').innerHTML = hh + ":" + mm + ":" + ss;
+            setTimeout(startTime, 500);
+        }
+
+        function checkNum(i) {
+            if (i < 10) i = "0" + i;
+            return i;
+        }
+
+        window.onload = function () {
+            startTime();
+        }
+    </script>
+    <style>
+        body {
+            font-size: 1.4em;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>Min</td>
+                <td><input type="number" id="min" value="1" /></td>
+            </tr>
+            <tr>
+                <td>Max</td>
+                <td><input type="number" id="max" value="49" /></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="button" onclick="exec()">產生彩號(<span id="clock"></span>)</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <p id="demo"></p>
+</body>
+</html>
