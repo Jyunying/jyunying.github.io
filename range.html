@@ -14,7 +14,8 @@
             let num = 0;
 
             // 產生亂數值存入 arr
-            while (num < max) {
+            while (num < (max-min)) {
+                debugger;
                 let randomResult = getRandom(min, max);
 
                 if (arr.indexOf(randomResult) === -1) {
@@ -65,7 +66,7 @@
         }
 
         function getRandom(min, max) {
-            return Math.floor(Math.random() * max) + 1;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         };
 
         function startTime() {
