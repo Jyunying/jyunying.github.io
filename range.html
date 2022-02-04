@@ -7,7 +7,7 @@
     <script>
 
         function lotteryLogic(min, max) {
-
+         
             document.getElementById("demo").innerHTML += '<b>樂透彩結果</b><br>'
 
             let arr = [];
@@ -65,7 +65,7 @@
         }
 
         function getRandom(min, max) {
-            return Math.floor(Math.random() * max) + min;
+            return Math.floor(Math.random() * max) + 1;
         };
 
         function startTime() {
